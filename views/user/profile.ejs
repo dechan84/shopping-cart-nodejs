@@ -1,0 +1,26 @@
+<% include ../partials/header%>
+<div class='row'>
+    <div class='col-md-9 offset-md-2'>
+        <h1>User Profile</h1>
+        <hr>
+        <h2>My Orders</h2>
+        <% orders.forEach(function(Order){ %>
+            <div class='card'>
+                <div class='card-body'>
+                    <ul class='list-group'>
+                       <% Order.items.forEach(function(product){ %>
+                        <li class='list-group-item'>
+                           <span class='badge badge-secondary float-right'>$<%=product.price%></span>
+                           <strong>Product Name:</strong> <%= product.item.title%> | <strong>Quantity: </strong><%= product.qty%> Units
+                        </li>
+                        <% }); %>
+                    </ul>
+                </div>
+                <div class='card-footer'>
+                   <strong>Order total: </strong>$<%= Order.cart.totalPrice %> | Bought about <%=moment(Order.createdAt).fromNow()%>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<% include ../partials/footer%>

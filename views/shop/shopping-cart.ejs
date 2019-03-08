@@ -1,0 +1,44 @@
+<% include ../partials/header%>
+<%if (products && totalPrice>0) {%>
+    <div class='row'>
+        <div class='col-sm-6 col-md-6 offset-md-3 offset-sm-3'>
+            <ul class='list-group'>
+                <% products.forEach(function(Product){ %>
+                <li class='list-group-item'>
+                    <span class='badge badge-secondary float-right'><%=Product.qty%></span>
+                    <strong><%=Product.item.title%></strong>
+                    <span class='badge badge-success'>$<%=Product.price%></span>
+                    <div class='btn-group dropdown'>
+                        <button class='btn btn-primary btn-sm dropdown-toggle' type='button' data-toggle='dropdown'>
+                            Action
+                        </button>
+                        <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                            <a class='dropdown-item' href='/reduce/<%=Product.item._id%>'>Reduce by 1</a>
+                            <div class='dropdown-divider'></div>
+                            <a class='dropdown-item' href='/remove/<%=Product.item._id%>'>Remove all</a>
+                        </ul>
+                    </div>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-sm-6 col-md-6 offset-md-3 offset-sm-3'>
+            <strong>Total: $<%= totalPrice%></strong>
+        </div>
+    </div>
+    <hr>
+    <div class='row'>
+        <div class='col-sm-6 col-md-6 offset-md-3 offset-sm-3'>
+            <a href='/checkout' type='button' class='btn btn-success'>Checkout</a>
+        </div>
+    </div>
+<% } else { %>
+    <div class='row'>
+        <div class='col-sm-6 col-md-6 offset-md-3 offset-sm-3'>
+            <h2>No Items in Cart</h2>
+        </div>
+    </div>
+<% }%>
+<% include ../partials/footer%>
